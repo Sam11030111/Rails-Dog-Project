@@ -16,6 +16,17 @@ Dog.destroy_all
 Location.destroy_all
 DogLocation.destroy_all
 
+# Helper method to fetch a random image for a specific breed
+def fetch_dog_image(breed)
+  image_url = "https://dog.ceo/api/breed/#{breed}/images/random"
+  image_response = URI.open(image_url).read
+  image_data = JSON.parse(image_response)
+  image_data['message']
+rescue
+  # Fallback to a default image URL if the API request fails
+  "https://via.placeholder.com/300x300.png"
+end
+
 # Create 30 Owners
 30.times do
   owner = Owner.create(
@@ -27,13 +38,19 @@ DogLocation.destroy_all
 
   # Create 5 Dogs for each owner
   5.times do
+    breed = breeds.sample
     dog = Dog.create(
       name: Faker::Creature::Dog.name,
-      breed: breeds.sample,
+      breed: breed,
       age: rand(1..15),
       gender: ['Male', 'Female'].sample,
       owner: owner
     )
+
+    # Fetch and attach an image for the dog breed
+    image_url = fetch_dog_image(breed)
+    file = URI.open(image_url)
+    dog.image.attach(io: file, filename: "#{dog.name}_#{breed}.jpg")
 
     # Create 3 Locations for each dog
     3.times do
@@ -49,5 +66,3 @@ DogLocation.destroy_all
 end
 
 puts "Database seeded successfully with #{Owner.count} owners, #{Dog.count} dogs, #{Location.count} locations, and #{DogLocation.count} dog_location records."
-
-

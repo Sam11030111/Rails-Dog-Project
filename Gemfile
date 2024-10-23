@@ -57,3 +57,6 @@ group :test do
 end
 
 gem 'faker'
+gem 'activeadmin'
+gem 'devise'
+gem 'sassc-rails'
