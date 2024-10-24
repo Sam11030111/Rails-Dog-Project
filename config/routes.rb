@@ -21,4 +21,7 @@ Rails.application.routes.draw do
 
   # Locations route
   resources :locations, only: [:index, :show]
+
+  # About route
+  resources :about, only: [:index]
 end

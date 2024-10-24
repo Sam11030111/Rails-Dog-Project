@@ -1,0 +1,15 @@
+<div class="container p-6">
+  <h1 class="mb-6 has-text-black is-size-1">About</h1>
+  <hr />
+  <h2 class="has-text-black is-size-3">Data Sources</h2>
+  <p class="has-text-black is-size-5">
+    This project uses data about dogs, owners, and locations. 
+    Each dog belongs to one owner (one-to-many relationship) and can be associated with multiple locations (many-to-many relationship). 
+    Owners have basic information like name, email, and address, while locations represent places dogs visit. 
+    Dog breeds and images are fetched from an external Dog API, and other data is generated using Faker. 
+    The relationships between these entities are maintained through foreign keys and a join table for the many-to-many association between dogs and locations.
+  </p>
+
+  <h2 class="has-text-black is-size-3 mt-6">ERD</h2>
+  <%= image_tag 'DogProject_ERD.png', alt: 'Husky' %>
+</div>
