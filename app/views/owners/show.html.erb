@@ -2,36 +2,13 @@
   <h1 class="mb-6 has-text-black is-size-1">
     <span class="has-text-primary"><%= @owner.name %></span>'s Dogs
   </h1>
-  <table class="table dogs-table">
-    <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Breed</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @dogs.each do |dog| %>
-        <tr>
-          <td>
-            <% if dog.image.attached? %>
-              <%= image_tag dog.image, size: "150x150", class: "dog-image" %>
-            <% else %>
-              <span>No image available</span>
-            <% end %>
-          </td>
-
-          <td>
-            <a href="<%= dog_path(dog) %>"><%= dog.name %></a>
-          </td>
-
-          <td>
-            <%= dog.breed %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="grid is-gap-6 dog-grid">
+    <% @dogs.each do |dog| %>
+        <div class="cell">
+          <%= render partial: 'dogs/dog', locals: { dog: dog } %>
+        </div>
+    <% end %>
+  </div>
 
   <%= render 'share/pagination', collection: @dogs %>
 </div>
