@@ -1,0 +1,67 @@
+body {
+    padding-top: 100px;
+}
+
+.table {
+    --bulma-table-background-color: white;
+    --bulma-table-color: black;
+}
+
+.dogs-table {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.owners-table {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table thead td, .table thead th {
+    color: black;
+}
+
+.table td {
+    vertical-align: middle;
+    width: 0%;
+}
+
+.table th {
+    color: black;
+}
+
+.dog-image {
+    border-radius: 10px;
+    border: 1px solid black; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100px;
+    object-fit: cover;
+}
+
+.dog-detail-image {
+    border-radius: 10px;
+    border: 1px solid black; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+
+.navbar-item.is-active {
+    background-color: transparent;
+    color: white;
+}
+
+.pagination {
+    margin-top: 150px;
+}
+
+.pagination-link.is-current {
+    background-color: hsl(171, 100%, 41%);
+    color: black;
+    border-color: hsl(171, 100%, 41%);
+}
+
+.pagination-link, .pagination-next, .pagination-previous {
+    color: black;
+}

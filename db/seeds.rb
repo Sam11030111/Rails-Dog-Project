@@ -27,7 +27,19 @@ rescue
   "https://via.placeholder.com/300x300.png"
 end
 
+# Create 10 Locations first
+locations = []
+20.times do
+  location = Location.create(
+    name: Faker::Address.community,
+    address: Faker::Address.full_address,
+    description: Faker::Lorem.sentence
+  )
+  locations << location
+end
+
 # Create 30 Owners
+owners = []
 30.times do
   owner = Owner.create(
     name: Faker::Name.name,
@@ -35,8 +47,12 @@ end
     phone_number: Faker::PhoneNumber.cell_phone,
     address: Faker::Address.full_address
   )
+  owners << owner
+end
 
-  # Create 5 Dogs for each owner
+# Create Dogs and associate them with Locations
+dogs = [] # Array to hold created dogs for later association
+locations.each do |location|
   5.times do
     breed = breeds.sample
     dog = Dog.create(
@@ -44,7 +60,8 @@ end
       breed: breed,
       age: rand(1..15),
       gender: ['Male', 'Female'].sample,
-      owner: owner
+      description: Faker::Lorem.sentence,
+      owner: owners.sample # Randomly assign an existing owner
     )
 
     # Fetch and attach an image for the dog breed
@@ -52,16 +69,19 @@ end
     file = URI.open(image_url)
     dog.image.attach(io: file, filename: "#{dog.name}_#{breed}.jpg")
 
-    # Create 3 Locations for each dog
-    3.times do
-      location = Location.find_or_create_by(
-        name: Faker::Address.community,
-        address: Faker::Address.full_address,
-        description: Faker::Lorem.sentence
-      )
+    # Associate the dog with the current location
+    DogLocation.create(dog: dog, location: location) unless DogLocation.exists?(dog: dog, location: location)
+    
+    # Add the dog to the array of dogs
+    dogs << dog
+  end
+end
 
-      DogLocation.create(dog: dog, location: location)
-    end
+# Associate each dog with random locations
+dogs.each do |dog|
+  random_locations = locations.sample(rand(1..3)) # Each dog can be associated with 1 to 3 random locations
+  random_locations.each do |location|
+    DogLocation.create(dog: dog, location: location) unless DogLocation.exists?(dog: dog, location: location)
   end
 end
 

@@ -1,5 +1,5 @@
 ActiveAdmin.register Dog do
-  permit_params :name, :breed, :age, :gender, :owner_id, :image
+  permit_params :name, :breed, :age, :gender, :owner_id, :image, location_ids: []
 
   # Specify the filters you want
   filter :name
@@ -16,6 +16,9 @@ ActiveAdmin.register Dog do
     column :age
     column :gender
     column :owner
+    column :locations do |dog|
+      dog.locations.map(&:name).join(', ') # Show location names
+    end
     column :image do |dog|
       if dog.image.attached?
         image_tag(url_for(dog.image), size: "50x50") # Display a small thumbnail
@@ -32,6 +35,7 @@ ActiveAdmin.register Dog do
       f.input :age
       f.input :gender
       f.input :owner
+      f.input :locations, as: :select, multiple: true, collection: Location.all.map { |location| [location.name, location.id] }
       f.input :image, as: :file
     end
     f.actions
@@ -44,6 +48,9 @@ ActiveAdmin.register Dog do
       row :age
       row :gender
       row :owner
+      row :locations do |dog|
+        dog.locations.map(&:name).join(', ') # Show location names
+      end
       row :image do |dog|
         if dog.image.attached?
           image_tag(url_for(dog.image) , size: "100x100")

@@ -1,5 +1,5 @@
 ActiveAdmin.register Location do
-  permit_params :name, :address, :description
+  permit_params :name, :address, :description,  dog_ids: []
 
   # Specify the filters you want
   filter :name
@@ -14,6 +14,9 @@ ActiveAdmin.register Location do
     column :name
     column :address
     column :description
+    column "Dogs" do |location|
+      location.dogs.map(&:name).join(", ") # Display the dog names
+    end
     column :created_at
     actions
   end
@@ -23,6 +26,7 @@ ActiveAdmin.register Location do
       f.input :name
       f.input :address
       f.input :description
+      f.input :dogs, as: :check_boxes, collection: Dog.all
     end
     f.actions
   end
@@ -32,6 +36,9 @@ ActiveAdmin.register Location do
       row :name
       row :address
       row :description
+      row "Dogs" do |location|
+        location.dogs.map(&:name).join(", ") # Display the dog names
+      end
     end
   end
 end

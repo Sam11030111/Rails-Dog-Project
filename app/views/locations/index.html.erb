@@ -1,0 +1,31 @@
+<div class="container p-6">
+  <h1 class="mb-6 has-text-black is-size-1">All Locations</h1>
+  <table class="table owners-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number of Dogs</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @locations.each do |location| %>
+        <tr>
+          <td>
+            <%= location.name %>
+          </td>
+
+          <td>
+            <%= location.dogs.count %>
+          </td>
+
+          <td>
+            <%= link_to "Show Dogs", location_path(location), class: "button is-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= render 'share/pagination', collection: @locations %>
+</div>

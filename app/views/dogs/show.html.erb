@@ -1,0 +1,40 @@
+<div class="container p-6">
+  <div class="columns is-vcentered is-variable is-8">
+    <div class="column is-6">
+      <% if @dog.image.attached? %>
+        <figure class="image is-4by3">
+          <%= image_tag @dog.image, class: 'dog-detail-image' %>
+        </figure>
+      <% else %>
+        <figure class="image is-4by3">
+          <img src="/images/husky.png" alt="Default Dog Image" class="dog-detail-image">
+        </figure>
+      <% end %>
+    </div>
+    <div class="column is-6">
+      <div class="content">
+        <h1 class="is-size-2 has-text-weight-bold has-text-primary"><%= @dog.name %></h1>
+        <p class="is-italic has-text-grey"><strong class="has-text-black">Breed:</strong> <%= @dog.breed %></p>
+        <p class="is-italic has-text-grey"><strong class="has-text-black">Age:</strong> <%= @dog.age %> years old</p>
+        <p class="is-italic has-text-grey"><strong class="has-text-black">Gender:</strong> <%= @dog.gender %></p>
+        <p class="is-italic has-text-grey"><strong class="has-text-black">Owner:</strong> <a href="<%= owner_path(@dog.owner) %>"><%= @dog.owner.name %></a></p>
+        <p class="is-italic has-text-grey">
+          <strong class="has-text-black">Locations:</strong>
+          <ul>
+            <% @dog.locations.each do |location| %>
+              <li>
+                <a href="<%= location_path(location) %>"><%= location.name %> - <%= location.address %></a>
+              </li>
+            <% end %>
+          </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container has-text-centered mt-6">
+    <hr class="my-6 has-background-grey-lighter">
+    <h2 class="title is-4 has-text-black">Description</h2>
+    <p class="is-italic has-text-grey"><%= @dog.description %></p>
+  </div>
+</div>
