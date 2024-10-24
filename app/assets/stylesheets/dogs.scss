@@ -2,6 +2,7 @@ body {
     padding-top: 100px;
 }
 
+// table
 .table {
     --bulma-table-background-color: white;
     --bulma-table-color: black;
@@ -32,7 +33,8 @@ body {
     color: black;
 }
 
-.dog-image {
+// dog image
+.dog-image, .dog-detail-image {
     border-radius: 10px;
     border: 1px solid black; 
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -40,18 +42,18 @@ body {
     object-fit: cover;
 }
 
-.dog-detail-image {
-    border-radius: 10px;
-    border: 1px solid black; 
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+.dog-card-image {
     object-fit: cover;
 }
 
+// navbar
 .navbar-item.is-active {
     background-color: transparent;
     color: white;
 }
 
+
+// pagination
 .pagination {
     margin-top: 150px;
 }
@@ -64,4 +66,20 @@ body {
 
 .pagination-link, .pagination-next, .pagination-previous {
     color: black;
+}
+
+// card
+.card {
+    border: 0.5px solid black;
+}
+
+.has-shadow {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+// dogs grid
+.dog-grid {
+    max-width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
 }

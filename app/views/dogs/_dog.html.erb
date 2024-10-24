@@ -1,0 +1,13 @@
+<div class="card has-background-white has-shadow">
+  <div class="card-image">
+    <% if dog.image.attached? %>
+      <figure class="image is-4by3">
+        <%= image_tag dog.image, size: "300x300", class: 'dog-card-image' %>
+      </figure>
+    <% end %>
+  </div>
+  <div class="card-content">
+    <a href="<%= dog_path(dog) %>"><%= dog.name %></a>
+    <p><%= dog.breed %></p>
+  </div>
+</div>
